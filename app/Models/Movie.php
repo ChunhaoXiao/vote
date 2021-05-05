@@ -39,7 +39,7 @@ class Movie extends Model
 
     public function scopeMyselect($query, $user_id)
     {
-        return $query->withCount(['vote_users', 'comments', 'vote_users as myvote' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }, 'score_users as myscore' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }])->withAvg('scores', 'score');
+        return $query->withCount(['vote_users', 'comments', 'vote_users as myvote' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }, 'score_users as myscore' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }])->withAvg('scores', 'score')->with('user');
     }
 
     public function activity()
