@@ -15,7 +15,6 @@ class Movie extends Model
         'path',
         'user_id',
         'activity_id',
-
     ];
 
     // public function votes()
@@ -38,15 +37,23 @@ class Movie extends Model
         return $this->hasMany(VideoRate::class, 'video_id');
     }
 
-    public function scopeMyselect($query, $user_id) {
-        return $query->withCount(['vote_users', 'comments', 'vote_users as myvote' => function($query) use($user_id) {$query->where('user_id', $user_id);}, 'score_users as myscore' => function($query) use($user_id){$query->where('user_id', $user_id);}])->withAvg('scores', 'score');
+    public function scopeMyselect($query, $user_id)
+    {
+        return $query->withCount(['vote_users', 'comments', 'vote_users as myvote' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }, 'score_users as myscore' => function ($query) use ($user_id) {$query->where('user_id', $user_id); }])->withAvg('scores', 'score');
     }
 
-    public function activity() {
+    public function activity()
+    {
         return $this->belongsTo(Activity::class)->withDefault();
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(VideoComment::class, 'video_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
