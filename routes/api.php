@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\MyVoteController;
 use App\Http\Controllers\Api\MyScoreController;
 use App\Http\Controllers\Api\RankController;
 use App\Http\Controllers\Api\RateController;
+use App\Http\Controllers\Api\ReceivedVoteController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\VideoCommentController;
 use App\Http\Controllers\Api\VoteController;
@@ -40,6 +41,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('myvote', [MyVoteController::class, 'index']);
     Route::get('myscore', [MyScoreController::class, 'index']);
     Route::resource('video.comment', VideoCommentController::class)->shallow();
+    Route::get("receivedvotes", [ReceivedVoteController::class, 'index']);
 });
 
 Route::post('login', [AuthController::class, 'store']);

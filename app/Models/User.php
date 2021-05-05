@@ -64,6 +64,10 @@ class User extends Authenticatable
         return $this->hasMany(VideoComment::class, 'user_id');
     }
 
+    public function voteusers() {
+        return $this->hasManyThrough(Vote::class, Movie::class, 'user_id', 'video_id');
+    }
+
     public function getUsernameAttribute()
     {
         return $this->name ?? 'user_'.$this->id;
