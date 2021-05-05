@@ -27,6 +27,7 @@ class Movie extends JsonResource
             'myvote' => $this->myvote,
             'myscore' => $this->myscore,
             'comments_count' => $this->comments_count,
+            'created_at' => $this->created_at->toDateTimeString(),
         ];
     }
 }
