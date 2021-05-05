@@ -29,6 +29,7 @@ class Activity extends Model
 
     public function scopeActive($query)
     {
-        return $query->has('videos')->orderBy('end_date', 'desc')->limit(1);
+        //return $query->has('videos')->orderBy('end_date', 'desc')->limit(1);
+        return $query->orderBy('end_date', 'desc')->limit(1);
     }
 }

@@ -17,11 +17,11 @@ class Activity extends JsonResource
     public function toArray($request)
     {
         $datas = parent::toArray($request);
-        $datas['icon'] = asset('storage/'.$this->icon??'');
+        $datas['icon'] = asset('storage/'.$this->icon);
         $datas['videos'] = Movie::collection($this->whenLoaded('videos'));
         $datas['videos_count'] = $this->videos_count;
         $datas['finished'] = now() < $this->end_date ? 0 : 1;
-       
+
         $datas['description'] = $request->activity ? $datas['description'] : Str::limit($datas['description'], 100);
 
         return $datas;
