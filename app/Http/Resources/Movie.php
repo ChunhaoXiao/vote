@@ -21,6 +21,7 @@ class Movie extends JsonResource
             'title' => $this->title ?? $this->description,
             'description' => $this->description,
             'author' => $this->user->username,
+            'activity_id' => $this->activity_id,
             'path' => asset('storage/'.$this->path),
             'vote_count' => $this->vote_users_count,
             'score' => round($this->scores_avg_score),
