@@ -10,6 +10,7 @@ use FFMpeg\Coordinate\TimeCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use View;
+use App\Events\VideoUploaded;
 
 class MovieController extends Controller
 {
@@ -26,6 +27,7 @@ class MovieController extends Controller
      */
     public function index()
     {
+        return view('admin.movie.index');
         // $FFMpeg = FFMpeg::create([
         //     'ffmpeg.binaries' => 'f:/ffmpeg/bin/ffmpeg.exe', // the path to the FFMpeg binary
         //     'ffprobe.binaries' => 'f:/ffmpeg/bin/ffprobe.exe', // the path to the FFProbe binary
@@ -57,7 +59,8 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         dump($request->all());
-        Movie::create($request->all());
+        $video = Movie::create($request->all());
+        event(new VideoUploaded($video));
     }
 
     /**
