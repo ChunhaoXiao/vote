@@ -15,8 +15,13 @@ class Movie extends Model
         'path',
         'user_id',
         'activity_id',
+        'pictures',
+        'thumb',
     ];
 
+    protected $casts = [
+        'pictures' => 'array',
+    ];
     // public function votes()
     // {
     //     return $this->hasMany(Vote::class, 'video_id');
@@ -59,5 +64,12 @@ class Movie extends Model
 
     public function votes() {
         return $this->hasMany(Vote::class, 'video_id');
+    }
+
+    public function getPicturePathAttribute() {
+        if(empty($this->pictures)) {
+            return [];
+        }
+        return array_map(function($item){ return asset('storage/'.$item);},$this->pictures);
     }
 }

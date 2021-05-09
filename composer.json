@@ -9,11 +9,13 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jenssegers/date": "^4.0",
         "jeroennoten/laravel-adminlte": "^3.5",
         "laravel/framework": "^8.12",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
-        "pbmedia/laravel-ffmpeg": "^7.5"
+        "pbmedia/laravel-ffmpeg": "^7.5",
+        "php-ffmpeg/php-ffmpeg": "^0.18.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

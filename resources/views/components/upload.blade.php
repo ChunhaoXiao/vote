@@ -1,17 +1,22 @@
-@props(['name', 'multiple' => 0])
+@props(['name', 'multiple' => 0, 'id' => 'file'])
 
 
-<input type="file" name="file" multiple>
-<div id="uploads" class="pt-2 d-flex"></div>
+<input type="file" name="file" multiple id="{{$id}}" />
 
-<div class="progress" style="display:none">
+
+
+<div class="progress" style="display:none; margin-top:5px" id="{{$id}}_bar">
   <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
-<input type="hidden" name="{{$name??'path'}}">
+<div id="{{$id}}_show" class="pt-2 d-flex"></div>
+
+<!-- <input type="hidden" name="{{$name??'path'}}"> -->
+
 <script type="module">
+    var id = "{{$id}}"
     $(document).ready(function(){
-        $('input[type=file]').change(function(){
+        $('#'+id).change(function(){
             $(this).simpleUpload("/admin/upload", {
                 /*
                 * Each of these callbacks are executed for each file.
@@ -25,7 +30,7 @@
                     //upload started
                     //this.block = $('<div class="block thumb" style="border:1px solid red"></div>');
                     this.progressBar = $('<div class="progressBar"></div>');
-                    $(".progress").show();
+                    $("#"+id+"_bar").show();
                     //this.block.append(this.progressBar);
                    // $('#uploads').append(this.block);
                 },
@@ -57,17 +62,22 @@
                     if (data.success) {
                         let name = "{{$name}}";
                         let multiple = "{{ $multiple }}"
-                        $("input[name="+name+"]").val(data.path);
+                        
                         //now fill the block with the format of the uploaded file
                         var format = data.format;
-                        let content = data.type == 'image' ? "<img src="+data.fullpath+" width=150 height=150 />" : 
+                        let content = data.type == 'image' ? "<img src="+data.fullpath+" width=150 height=150></img>" : 
                         "<video src="+data.fullpath+" controls width=250 height=200></video>";
+
                         var formatDiv = $('<div class="format pr-1"></div>').html(content);
                         console.log("multiple:", multiple)
                         if(multiple == 1) {
-                            $("#uploads").append(formatDiv);
+                            formatDiv.append("<input type=hidden value="+data.path+" name="+name+"[] />");
+                            $("#"+id+"_show").append(formatDiv);
+                            //$("#"+id+"_show").append("<input type=hidden name="+name )
                         }else {
-                            $("#uploads").html(formatDiv);
+                            //$("input[name="+name+"]").val(data.path);
+                            formatDiv.append("<input type=hidden value="+data.path+" name="+name+" />");
+                            $("#"+id+"_show").html(formatDiv);
                         }
                         
                     } else {

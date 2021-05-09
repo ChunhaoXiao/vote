@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\ActivityVideoController;
 use App\Http\Controllers\Api\AssetController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\MovieController;
 use App\Http\Controllers\Api\MyVoteController;
 use App\Http\Controllers\Api\MyScoreController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\VideoCommentController;
 use App\Http\Controllers\Api\VoteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\MyvideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +44,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('myscore', [MyScoreController::class, 'index']);
     Route::resource('video.comment', VideoCommentController::class)->shallow();
     Route::get("receivedvotes", [ReceivedVoteController::class, 'index']);
+    Route::get('myvideos', [MyvideoController::class, 'index']);
 });
 
 Route::post('login', [AuthController::class, 'store']);
 Route::get('asset', [AssetController::class, 'index']);
+Route::get('config', [ConfigController::class, 'index']);
+
+

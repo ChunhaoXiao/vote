@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Activity;
 use App\Http\Resources\Activity as ActivityResource;
 use App\Http\Requests\VideoStoreRequest;
+use App\Events\VideoUploaded;
 class MovieController extends Controller
 {
     public function index()
@@ -35,6 +36,7 @@ class MovieController extends Controller
 
     public function store(VideoStoreRequest $request)
     {
-        Auth::user()->videos()->create($request->all());
+        $movie = Auth::user()->videos()->create($request->all());
+        event(new VideoUploaded($movie));
     }
 }
