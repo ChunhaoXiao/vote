@@ -1,16 +1,18 @@
 <?php
+
 //前台首页
+
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Movie as MovieResource;
-use App\Models\Movie;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Activity;
-use App\Http\Resources\Activity as ActivityResource;
-use App\Http\Requests\VideoStoreRequest;
 use App\Events\VideoUploaded;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\VideoStoreRequest;
+use App\Http\Resources\Activity as ActivityResource;
+use App\Http\Resources\Movie as MovieResource;
+use App\Models\Activity;
+use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
+
 class MovieController extends Controller
 {
     public function index()
@@ -20,9 +22,14 @@ class MovieController extends Controller
         //     $datas = $activity->videos()->myselect(Auth::id())->latest()->paginate();
         // }
         //$datas = Movie::myselect(Auth::id())->latest()->paginate();
-        $datas = Activity::active()->with(['videos' => function($query){ $query->myselect(Auth::id())->latest()->limit(8);}])->first();
+        //$datas = Activity::active()->with(['videos' => function ($query) { $query->myselect(Auth::id())->latest()->limit(8); }])->first();
+        $activity = Activity::active()->first();
+        $videos = $activity->videos()->paginate(8);
 
-        return new ActivityResource($datas);
+        return [
+            'activity' => new ActivityResource($activity), 
+            'videos' => MovieResource::collection($videos),
+        ];
 
         //return MovieResource::collection($datas);
     }
