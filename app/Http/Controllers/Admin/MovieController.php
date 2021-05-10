@@ -27,18 +27,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return view('admin.movie.index');
-        // $FFMpeg = FFMpeg::create([
-        //     'ffmpeg.binaries' => 'f:/ffmpeg/bin/ffmpeg.exe', // the path to the FFMpeg binary
-        //     'ffprobe.binaries' => 'f:/ffmpeg/bin/ffprobe.exe', // the path to the FFProbe binary
-        //     'timeout' => 3600, // the timeout for the underlying process
-        //     'ffmpeg.threads' => 12,   // the number of threads that FFMpeg should use
-        // ]);
-        // //dump($FFMpeg);
-        // dump(storage_path('app/public'));
-        // $video = $FFMpeg->open(storage_path('app/public').'/videos/9nAbrUlhK8pAxPi22tzxXb0tvzNDzLlVGltfrhDz.mp4');
-        // $frame = $video->frame(TimeCode::fromSeconds(5));
-        // $frame->save(storage_path('app/public').'/image.jpg');
+        $datas = Movie::latest()->with('activity')->paginate();
+        return view('admin.movie.index', ['datas' => $datas]);
     }
 
     /**
@@ -105,5 +95,7 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
+        Movie::destroy($id);
+        return response()->json(['success' => 1]);
     }
 }
