@@ -24,7 +24,7 @@ class MovieController extends Controller
         //$datas = Movie::myselect(Auth::id())->latest()->paginate();
         //$datas = Activity::active()->with(['videos' => function ($query) { $query->myselect(Auth::id())->latest()->limit(8); }])->first();
         $activity = Activity::active()->first();
-        $videos = $activity->videos()->paginate(8);
+        $videos = $activity->videos()->myselect(Auth::id())->paginate(8);
 
         return [
             'activity' => new ActivityResource($activity), 
