@@ -17,6 +17,10 @@
             <label for="">标题</label>
             <input type="text" class="form-control" name="title">
         </div>
+        <div class="form-group">
+            <label for="">伪造标题</label>
+            <input type="text" class="form-control" name="fake_title">
+        </div>
 
         <div class="form-group">
             <label for="">作者</label>

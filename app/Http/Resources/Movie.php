@@ -31,6 +31,7 @@ class Movie extends JsonResource
             'comments_count' => $this->comments_count,
             'created_at' => $this->created_at->toDateTimeString(),
             'thumb' => asset('storage/'.$this->thumb),
+            'fake_title' => $this->fake_title,
         ];
     }
 }

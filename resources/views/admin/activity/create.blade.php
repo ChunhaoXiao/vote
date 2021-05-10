@@ -13,13 +13,13 @@
                 <label for="" class="col-form-label">
                     活动开始日期
                 </label>
-                <input type="date" class="form-control" name="start_date" value="{{$data->start_date->toDateString()??''}}">
+                <input type="date" class="form-control" name="start_date" value="{{!empty($data->start_date)?$data->start_date->toDateString():''}}">
             </div>
             <div class="form-group">
                 <label for="" class="col-form-label">
                     活动截止日期
                 </label>
-                <input type="date" class="form-control" name="end_date" value="{{$data->end_date->toDateString()??''}}">
+                <input type="date" class="form-control" name="end_date" value="{{!empty($data->end_date)?$data->end_date->toDateString():''}}">
             </div>
             <div class="form-group">
                 <label for="" class="col-form-label">

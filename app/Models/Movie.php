@@ -17,6 +17,7 @@ class Movie extends Model
         'activity_id',
         'pictures',
         'thumb',
+        'fake_title',
     ];
 
     protected $casts = [
@@ -62,14 +63,17 @@ class Movie extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function votes() {
+    public function votes()
+    {
         return $this->hasMany(Vote::class, 'video_id');
     }
 
-    public function getPicturePathAttribute() {
-        if(empty($this->pictures)) {
+    public function getPicturePathAttribute()
+    {
+        if (empty($this->pictures)) {
             return [];
         }
-        return array_map(function($item){ return asset('storage/'.$item);},$this->pictures);
+
+        return array_map(function ($item) { return asset('storage/'.$item); }, $this->pictures);
     }
 }

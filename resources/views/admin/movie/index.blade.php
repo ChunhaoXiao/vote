@@ -21,7 +21,7 @@
         					<td>{{$v->title}}</td>
         					<td>{{$v->activity->title}}</td>
         					<td>{{$v->created_at}}</td>
-        					<td><img src="{{asset('storage/'.$v->thumb)}}"></td>
+        					<td><img src="{{asset('storage/'.$v->thumb)}}" style="width:50px;height:50px"></td>
         					<td><a href="javascript:;" class="far fa-trash-alt" data-url="{{route('admin.movie.destroy', $v)}}"></a></td>
         				</tr>
         			@endforeach
