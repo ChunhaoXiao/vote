@@ -265,6 +265,11 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text' => '系统设置',
+            'url' => 'admin/config',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AssetResourceController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\ConfigController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/asset', AssetResourceController::class);
     Route::resource('/movie', MovieController::class);
     Route::resource('/activity', ActivityController::class);
+    Route::get('/config', [ConfigController::class, 'create'])->name('config.create');
+    Route::post('/config', [ConfigController::class, 'store'])->name('config.store');
 });

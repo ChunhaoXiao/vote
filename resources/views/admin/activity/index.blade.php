@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-    <div class="container">
+    <div class="">
         <p><a class="btn btn-info" href="{{ route('admin.activity.create') }}">添加活动</a></p>
 
         <table class="table table-bordered">
@@ -10,6 +10,7 @@
                 <th>开始时间</th>
                 <th>结束时间</th>
                 <th>图标</th>
+                <th></th>
             </thead>
             <tbody>
                 @foreach($datas as $v)
@@ -18,6 +19,7 @@
                         <td>{{ $v->start_date }}</td>
                         <td>{{ $v->end_date }}</td>
                         <td><img src="{{asset('storage/'.$v->icon)}}" alt="" width="50" height="50"></td>
+                        <td><a href="{{route('admin.activity.edit', $v)}}">修改</a> | 删除</td>
                     </tr>
                 @endforeach
             </tbody>

@@ -12,6 +12,7 @@ class ActivityController extends Controller
     {
         $datas = Activity::latest()->paginate();
 
+
         return view('admin.activity.index', ['datas' => $datas]);
     }
 
@@ -23,5 +24,15 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         Activity::create($request->all());
+        return redirect()->route('admin.activity.index');
+    }
+
+    public function edit(Activity $activity) {
+        return view('admin.activity.create', ['data' => $activity]);
+    }
+
+    public function update(Request $request, Activity $activity) {
+        $activity->update($request->all());
+        return redirect()->route('admin.activity.index');
     }
 }
