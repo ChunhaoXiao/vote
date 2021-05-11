@@ -32,6 +32,7 @@ class Movie extends JsonResource
             'created_at' => $this->created_at->toDateTimeString(),
             'thumb' => asset('storage/'.$this->thumb),
             'fake_title' => $this->fake_title,
+            'user' => $this->user->username ?? '',
         ];
     }
 }
