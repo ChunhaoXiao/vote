@@ -22,7 +22,10 @@
         					<td>{{$v->activity->title}}</td>
         					<td>{{$v->created_at}}</td>
         					<td><img src="{{asset('storage/'.$v->thumb)}}" style="width:50px;height:50px"></td>
-        					<td><a href="javascript:;" class="far fa-trash-alt" data-url="{{route('admin.movie.destroy', $v)}}"></a></td>
+        					<td>
+							<a href="{{route('admin.movie.edit', $v)}}">修改</a> |
+							<a href="javascript:;" class="far fa-trash-alt" data-url="{{route('admin.movie.destroy', $v)}}"></a>
+							</td>
         				</tr>
         			@endforeach
         		</tbody>

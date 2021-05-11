@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\VideoUploaded;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Movie;
-use FFMpeg\FFMpeg;
-use FFMpeg\Coordinate\TimeCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use View;
-use App\Events\VideoUploaded;
 
 class MovieController extends Controller
 {
@@ -28,6 +26,7 @@ class MovieController extends Controller
     public function index()
     {
         $datas = Movie::latest()->with('activity')->paginate();
+
         return view('admin.movie.index', ['datas' => $datas]);
     }
 
@@ -73,6 +72,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
+
+        $movie = Movie::findOrFail($id);
+        return view('admin.movie.create', ['data' => $movie]);
     }
 
     /**
@@ -84,6 +86,9 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $movie = Movie::findOrFail($id);
+        $movie->update($request->input());
+        return redirect()->route('admin.movie.index');
     }
 
     /**
@@ -96,6 +101,7 @@ class MovieController extends Controller
     public function destroy($id)
     {
         Movie::destroy($id);
+
         return response()->json(['success' => 1]);
     }
 }
