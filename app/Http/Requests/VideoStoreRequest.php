@@ -24,16 +24,20 @@ class VideoStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|max:100',
+            'description' => 'nullable|max:150',
+            'title' => 'required|max:50|min:5',
             'path' => 'required',
             'activity_id' => 'required',
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
-            'description.required' => '视频描述不能为空',
-            'description.max' => '视频描述最多100个字符',
+            'title.required' => '视频标题不能为空',
+            'title.max' => '标题最多50字',
+            'title.min' => '标题最少5个字',
+            'description.max' => '视频描述最多150个字符',
         ];
     }
 }
